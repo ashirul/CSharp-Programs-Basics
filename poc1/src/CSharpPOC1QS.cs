@@ -52,29 +52,42 @@ namespace CSharpPOC1
         {
             var binBit = new List<long>();
             var temp = Convert.ToInt64(input);
-            while (temp > 0)
+            if (temp != 0)
             {
-                binBit.Add(temp % 2);
-                temp = temp / 2;
+                while (temp > 0)
+                {
+                    binBit.Add(temp % 2);
+                    temp = temp / 2;
+                }
+                binBit.Reverse();
+                return string.Join("", binBit);
             }
-            binBit.Reverse();
-            return string.Join("", binBit);
+            else if (temp == 0)
+                return "0";
+            return "";
         }
 
         // Consecutive 1's in Binary Equivalent
         public void consecutiveones(string bin)
         {
             var tempBin = binary(bin);
-            Console.WriteLine("Equivalent Binary: "+ tempBin);
-            var count = 1;
-            for (var i = 0; i < tempBin.Length - 1; i++)
+            var onlyOnes = tempBin.Split('0');
+            var count = 0;
+            if (bin == "0")
             {
-                if (tempBin[i] == '1' && tempBin[i + 1] == '1')
-                {
-                    count++;
-                }
+                Console.WriteLine("Binary Equivalent: 0");
+                Console.WriteLine("Maximum number of Consecutive 1's: 0");
             }
-            Console.WriteLine("Consecutive 1's: " + count);
+            else
+            {
+                Array.Sort(onlyOnes);
+                count = Convert.ToInt32(onlyOnes[onlyOnes.Length - 1].Length);
+                Console.WriteLine();
+                if (count == 0)
+                    count = 1;
+                Console.WriteLine("Binary Equivalent: " + tempBin);
+                Console.WriteLine("Maximum number of Consecutive 1's: " + count);
+            }
         }
 
         // Sorting Array in Ascending Order
